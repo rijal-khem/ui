@@ -145,6 +145,10 @@ resource "aws_instance" "ec2_ui" {
 
 }
 
+output "instance_ip" {
+  value = aws_instance.ec2_ui.public_ip
+}
+
 
 
 
