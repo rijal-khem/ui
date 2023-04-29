@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('SCM') {
+    stage('Server') {
       steps {
-        git(url: 'https://github.com/rijal-khem/ui.git', branch: 'initial')
+        sh 'echo "Building UI Project"'
       }
     }
 
