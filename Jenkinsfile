@@ -2,6 +2,15 @@
         agent any
         stages {
 
+            stage('Git checkout') {
+
+               steps {
+                 git 'https://github.com/rijal-khem/ui.git'
+                 git checkout
+               }
+
+             }
+
             stage('TF-Init') {
                     steps {
                         sh 'terraform init'
