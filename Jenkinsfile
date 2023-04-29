@@ -1,23 +1,53 @@
 pipeline {
     agent any
+    stages {
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
+        stage('TF-Init') {
+            steps {
+             sh 'terraform init'
+            }
+
+        }
+
+        stage('TF-Validate') {
+                    steps {
+                     sh 'terraform validate'
+                    }
+
+                }
+        stage('Plan') {
+            steps {
+                sh 'terraform plan'
+                sh 'terraform show -no-color tfplan > tfplan.txt'
+            }
+        }
+
+        stage('Approval') {
+            when {
+                not {
+                    equals expected: true, actual: params.autoApprove
+                }
+            }
+
+            steps {
+                script {
+                    def plan = readFile 'tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                        parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                }
+            }
+        }
+
+        stage('Apply') {
+            steps {
+                sh "terraform apply -input=false tfplan"
+            }
+        }
     }
 
-    stages {
-        stage('Build') {
-            steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/rijal-khem/ui.git'
-
-                // Run Maven on a Unix agent.
-                sh "terraform init"
-                sh "terraform validate"
-                sh "terraform plan"
-                sh "terraform apply -auto-approve"
-            }
+    post {
+        always {
+            archiveArtifacts artifacts: 'tfplan.txt'
         }
     }
 }
