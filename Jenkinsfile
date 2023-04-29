@@ -1,41 +1,45 @@
-    pipeline {
-        agent any
-        stages {
+  pipeline {
+    agent  any
+      stages {
 
-            stage('Git checkout') {
-
-               steps {
-                 git 'https://github.com/rijal-khem/ui.git'
-                 git checkout
-               }
-
-             }
-
-            stage('TF-Init') {
-                    steps {
-                        sh 'terraform init'
-                    }
+            stage ('Checkout GitHub'){
+              steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/initial']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkinsAccess', url: 'https://github.com/rijal-khem/ui.git']]])
+              }
             }
 
-            stage('TF-Validate') {
-                    steps {
-                        sh 'terraform validate'
-                    }
-
+            stage('terraform init') {
+                 steps {
+                     script {
+                         sh 'terraform init -no-color'
+                     }
+                 }
             }
 
-            stage('Plan') {
-                    steps {
-                        sh 'terraform plan'
-                        sh 'terraform show -no-color tfplan > tfplan.txt'
-                    }
+            stage('terraform Plan') {
+                 steps {
+                      script {
+                         sh 'terraform plan -no-color -out=plan.out'
+                      }
+                 }
             }
 
-            stage('Apply') {
-                    steps {
-                        sh 'terraform apply'
-                    }
+            stage('Waiting for Approvals') {
+
+                steps {
+                    input('Plan Validated? Please approve to create VPC Network in AWS?')
+                }
             }
-        }
+
+            stage('terraform Apply') {
+
+                 steps {
+                        script {
+                              sh 'terraform apply -no-color -auto-approve plan.out'
+                              sh "terraform output"
+                        }
+                 }
+            }
+      }
 
     }
