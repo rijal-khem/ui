@@ -1,16 +1,14 @@
 
 import './App.css';
-import LogIn from './components/Login'
-import Card from './components/Card';
 import About from './components/About';
+import Main from './components/Main';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      
-    <About/>
-
-    
+    <Navbar/>
+    <Main/>
     </div>
   );
 }
