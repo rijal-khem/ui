@@ -22,13 +22,6 @@ pipeline {
             }
         }
 
-        stage('Approval') {
-            when {
-                not {
-                    equals expected: true, actual: params.autoApprove
-                }
-            }
-
             steps {
                 script {
                     def plan = readFile 'tfplan.txt'
