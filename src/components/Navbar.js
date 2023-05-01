@@ -1,17 +1,22 @@
 import './Navbar.css';
 
 
+
 function Navbar () {
 
     return (
-        <div className='flex'>
-           <ul>
-            <li>About</li>
-            <li>Visualization</li>
-            <li>Games</li>
-            <li>Rizzkitch</li>
-           </ul>
-        </div>
+        <nav>
+            <header>
+                <h1>Logo Here</h1>
+            </header>
+            <ul>
+                <li> about </li>
+                <li>visualization</li>
+                <li>games</li>
+                <li>rizzkitch</li>
+                <li>contact</li>
+            </ul>
+        </nav>
     )
 }
 
