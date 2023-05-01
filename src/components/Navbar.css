@@ -1,3 +1,45 @@
 
 
+.navbar {
+    display: block;
+    float: inline-end;
+    margin:0;
+    overflow: hidden;
+    text-align: center;
+    background-color: aqua;
+    font-size: x-large;
+    width:100%;
+    text-decoration: none;
+    font-size: large;
+    
+    
+
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+
+
+li {
+    align-self:center;
+    display: inline-flex;
+    padding: 30px;
+    margin-top: 0%;
+    color: black;
+    list-style: none;
+    text-decoration: none;
+    
+    
+}
+
+li:hover {
+    color: orange;
+
+}
+
 
