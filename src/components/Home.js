@@ -4,11 +4,11 @@ import './Home.css'
 function Home (){
 
     const firstLine =`public static Fun live(WeekDay day) Throws LeaveExceptions {`
-    const secondLine = `  while(day.isWeekend())){
+    const secondLine = `  if(day.isWeekend())){
            return   travellingTo(Places.Randomize())
           
             }`
-    const thirdLine =`    return Fun.makeOutOF(coding() + cooking());
+    const thirdLine =`    return Fun.makeOutOF(coding(),cooking());
            
       }`
 
