@@ -46,7 +46,7 @@ function Home (){
 
                 </div>
                 <div class ="col-2">
-                <img class ="landing-image" src="/imgs/profile/profilePic.jpg"></img>
+                <img class ="landing-image" src="/imgs/profile/profilePic.jpg" alt="Rizal"></img>
                     
                 </div>
             </div>
