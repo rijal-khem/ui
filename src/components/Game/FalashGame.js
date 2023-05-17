@@ -10,8 +10,8 @@ const FalashGame = () => {
     const [isShuffle, setIsShuffle] = useState(false)
 
     useEffect(()=>{
-        let newDeck = initialCards.shuffle();
-        setInitialCards(newDeck)
+        setInitialCards(initialCards.shuffle())
+        setIsShuffle(false)
     }, [isShuffle])
      
 
