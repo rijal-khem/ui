@@ -1,0 +1,39 @@
+
+
+.game-container{
+  background-color:blueviolet;
+  height: 100vh;
+  display: flex;
+
+}
+
+.game-view {
+    order:1;
+    flex :80%;
+    background-color: aliceblue;
+    border: 4px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.player1-area {
+    order:1;
+ 
+  background-color: blue;
+  flex: 1;
+  
+}
+
+.player2-area{
+    order:2;
+    background-color: aliceblue;
+    flex: 1;
+
+}
+
+.right-sidebar {
+    order:2;
+    flex:20%;
+
+}
