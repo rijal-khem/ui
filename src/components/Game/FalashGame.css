@@ -1,0 +1,19 @@
+.falash-game-container{
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+.player1-container {
+    flex: 1;
+    
+}
+
+img{
+    height: 100px;
+    width :70px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1px;
+    margin: 1px;
+}
