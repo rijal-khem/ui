@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 function Navbar () {
 
     return (
-    <div class ="container">
-        <nav class="navbar">
-         <div class ="logo" >
+    <div className ="container">
+        <nav className="navbar">
+         <div className ="logo" >
             <Link to="/">
-            <img class="logo-image" src='/imgs/logo.png' alt="logo"></img>
+            <img className="logo-image" src='/imgs/logo.png' alt="logo"></img>
             </Link>
 
           </div>

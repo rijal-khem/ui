@@ -38,6 +38,6 @@ class Card {
 function freshDeck() {
 
     return SUITS.flatMap(suit=> 
-        {return VALUES.map(value=>{ 
+        {return VALUES.map((value,key)=>{ 
             return new Card(suit,value)})});
 }

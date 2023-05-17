@@ -18,10 +18,10 @@ function Home (){
 
 
     return (
-        <div class="container">
+        <div className="container">
            
-            <div class="row-1">
-                <div class ="col-1">
+            <div className="row-1">
+                <div className ="col-1">
                     <p>
                         <code>
                             {firstLine}
@@ -35,7 +35,7 @@ function Home (){
                                        
                     </p>
                     <br/>
-                <div class="row-2">
+                <div className="row-2">
                     <p>
                    <h1>Hi, I am an engineer based in Delaware, USA.</h1>  <br/>
                     Since 2014, I have enjoyed turning complex problems <br/> 
@@ -45,8 +45,8 @@ function Home (){
 
 
                 </div>
-                <div class ="col-2">
-                <img class ="landing-image" src="/imgs/profile/profilePic.jpg" alt="Rizal"></img>
+                <div className ="col-2">
+                <img className ="landing-image" src="/imgs/profile/profilePic.jpg" alt="Rizal"></img>
                     
                 </div>
             </div>
