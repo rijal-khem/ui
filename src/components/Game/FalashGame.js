@@ -7,19 +7,8 @@ import CardsComparator from './CardsComparator';
 
 
 
-
 const FalashGame = ({playerName}) => {   
 
-    const computerPlayer = {
-        name:"Computer",
-        score:0,
-        cards:[]
-    }
-    const player = {
-        name:playerName,
-        score:0,
-        cards:[]
-    }
 
     const deck = new Deck();
     
@@ -31,6 +20,20 @@ const FalashGame = ({playerName}) => {
     const [isDealDisabled, setIsDealDisabled] = useState(false)
     const [isSee, setIsSee] = useState(false)
     const [winner, setWinner] = useState("");
+
+    const [player, setPlayer] = useState({
+        name:playerName,
+        score:0,
+        cards:[]
+
+    })
+
+    const [computerPlayer, setComputerPlayer] = useState({
+        name:"Computer",
+        score:0,
+        cards:[]
+    })
+
 
 
     useEffect(()=>{
@@ -53,6 +56,8 @@ const FalashGame = ({playerName}) => {
             computerPlayer.cards.push(initialCards.cards.pop());
             player.cards.push(initialCards.cards.pop());
         } 
+        console.log(player.cards)
+        console.log(computerPlayer.cards)
         setIsDealDisabled(true) 
     }
 
@@ -70,6 +75,8 @@ const FalashGame = ({playerName}) => {
     const handleShowClick =()=>{
        setIsShow(true);
        setIsDealDisabled(false);
+       console.log(player.cards)
+       console.log(computerPlayer.cards)
        const winningCards = CardsComparator(player.cards, computerPlayer.cards)
       if(winningCards===player.cards){
         console.log("Player is Winner");
