@@ -2,18 +2,24 @@ import './FalashGame.css'
 import Deck from './Deck';
 import React, { useEffect, useState } from 'react';
 import Card from './Card'
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 import CardsComparator from './CardsComparator';
 
 
 
-const computerPlayer = {
-    name:"Computer",
-    score:0,
-    cards:[]
-}
+
 
 const FalashGame = ({playerName}) => {   
+
+    const computerPlayer = {
+        name:"Computer",
+        score:0,
+        cards:[]
+    }
+    const player = {
+        name:playerName,
+        score:0,
+        cards:[]
+    }
 
     const deck = new Deck();
     
@@ -26,23 +32,6 @@ const FalashGame = ({playerName}) => {
     const [isSee, setIsSee] = useState(false)
     const [winner, setWinner] = useState("");
 
-    const [player, setPlayer] = useState({
-        name:playerName,
-        score:0,
-        cards:[]
-
-    })
-
-    const [computerPlayer, setComputerPlayer] = useState({
-        name:"Computer",
-        score:0,
-        cards:[]
-    })
-
-    const players = [player, computerPlayer];
-    
-
-
 
     useEffect(()=>{
         setInitialCards(initialCards=> initialCards.shuffle())
@@ -53,7 +42,7 @@ const FalashGame = ({playerName}) => {
 
 
     const dealCards =()=>{
-        if(computerPlayer.cards.length!=0 || player.cards.length!=0){
+        if(computerPlayer.cards.length!==0 || player.cards.length!==0){
             cleanPreviousCards();
             setWinner("")
         }
@@ -82,11 +71,11 @@ const FalashGame = ({playerName}) => {
        setIsShow(true);
        setIsDealDisabled(false);
        const winningCards = CardsComparator(player.cards, computerPlayer.cards)
-      if(winningCards==player.cards){
+      if(winningCards===player.cards){
         console.log("Player is Winner");
         player.score = player.score+1;
         setWinner(player.name)
-      }else if(winningCards==computerPlayer.cards){
+      }else if(winningCards===computerPlayer.cards){
         console.log("Computer Player is Winner");
         computerPlayer.score = computerPlayer.score+1;
         setWinner(computerPlayer.name);
