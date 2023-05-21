@@ -56,9 +56,9 @@ export default function CardsComparator(playerCards, computerPlayerCards){
     } else if(isPair(computerPlayerCards) && !isPair(playerCards)){
         return computerPlayerCards;
     }else if (isPair(playerCards) && isPair(computerPlayerCards)){
-        return innerCardsCompareForPairsAndTop(playerCards, computerPlayerCards, true)
+        return innerCardsCompareForPairs(playerCards, computerPlayerCards, true)
     }else if(isTop(playerCards) && isTop(computerPlayerCards)){
-        return innerCardsCompareForPairsAndTop(playerCards, computerPlayerCards, false);
+        return innerCardsCompareForTop(playerCards, computerPlayerCards, false);
     }
 }
 
@@ -98,30 +98,28 @@ const innerCardsCompare= (playerCards, computerPlayerCards)=>{
 
 }
 
-const innerCardsCompareForPairsAndTop= (playerCards, computerPlayerCards, isPairComparision)=>{
+const innerCardsCompareForPairs= (playerCards, computerPlayerCards)=>{
 
     //common function for inner comparision of cards. for pair the middle car is compared first and left right. so mid = idx+1
     //send isPairComparision true for inner compare of pair cards.
     //for top starts for left which is idx = -1 i.e -1+1 = 0 index, can be refactired later.
     // send isPairComparision  false for comparing the top cards.
-    var idx =0;
-    if(!isPairComparision){
-        idx = -1;
-    }
-    
-    if(CARD_VALUE_MAP[playerCards[idx+1].value]>CARD_VALUE_MAP[computerPlayerCards[idx+1].value]){
+   
+   var idx =0;
+
+    if(CARD_VALUE_MAP[playerCards[1].value]>CARD_VALUE_MAP[computerPlayerCards[1].value]){
         return playerCards;
-    }else if (CARD_VALUE_MAP[playerCards[idx+1].value]===CARD_VALUE_MAP[computerPlayerCards[idx+1].value])
+    }else if (CARD_VALUE_MAP[playerCards[1].value]===CARD_VALUE_MAP[computerPlayerCards[1].value])
     {
-                if(CARD_VALUE_MAP[playerCards[idx].value] > CARD_VALUE_MAP[computerPlayerCards[idx].value])
+                if(CARD_VALUE_MAP[playerCards[0].value] > CARD_VALUE_MAP[computerPlayerCards[0].value])
                 {
                         return playerCards;
-                }else if (CARD_VALUE_MAP[playerCards[idx].value] === CARD_VALUE_MAP[computerPlayerCards[idx].value])
+                }else if (CARD_VALUE_MAP[playerCards[0].value] === CARD_VALUE_MAP[computerPlayerCards[0].value])
                 {
-                            if(CARD_VALUE_MAP[playerCards[idx+2].value]>CARD_VALUE_MAP[computerPlayerCards[idx+2].value])
+                            if(CARD_VALUE_MAP[playerCards[2].value]>CARD_VALUE_MAP[computerPlayerCards[2].value])
                             {
                                 return playerCards;
-                            }else if (CARD_VALUE_MAP[playerCards[idx+2].value]===CARD_VALUE_MAP[computerPlayerCards[idx+2].value])
+                            }else if (CARD_VALUE_MAP[playerCards[2].value]===CARD_VALUE_MAP[computerPlayerCards[2].value])
                             {
                                     if(playerCards[0].suit==="SPADE")
                                     {
@@ -134,6 +132,40 @@ const innerCardsCompareForPairsAndTop= (playerCards, computerPlayerCards, isPair
                 } else return computerPlayerCards;
     } else return computerPlayerCards;
 }
+
+
+const innerCardsCompareForTop= (playerCards, computerPlayerCards, isPairComparision)=>{
+
+
+    
+    if(CARD_VALUE_MAP[playerCards[0].value]>CARD_VALUE_MAP[computerPlayerCards[0].value]){
+        return playerCards;
+    }else if (CARD_VALUE_MAP[playerCards[0].value]===CARD_VALUE_MAP[computerPlayerCards[0].value])
+    {
+                if(CARD_VALUE_MAP[playerCards[1].value] > CARD_VALUE_MAP[computerPlayerCards[1].value])
+                {
+                        return playerCards;
+                }else if (CARD_VALUE_MAP[playerCards[1].value] === CARD_VALUE_MAP[computerPlayerCards[1].value])
+                {
+                            if(CARD_VALUE_MAP[playerCards[2].value]>CARD_VALUE_MAP[computerPlayerCards[2].value])
+                            {
+                                return playerCards;
+                            }else if (CARD_VALUE_MAP[playerCards[2].value]===CARD_VALUE_MAP[computerPlayerCards[2].value])
+                            {
+                                    if(playerCards[0].suit==="SPADE")
+                                    {
+                                        return playerCards;
+                                    } else if (computerPlayerCards[0].suit==="SPADE"){
+                                        return computerPlayerCards;
+                                    } else return 0; 
+                            }else return computerPlayerCards;
+       
+                } else return computerPlayerCards;
+    } else return computerPlayerCards;
+}
+
+
+
 
 
 
