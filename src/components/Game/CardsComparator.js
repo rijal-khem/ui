@@ -1,5 +1,3 @@
-import Card from "./Card";
-
 
 const CARD_VALUE_MAP = {
     "2":2, 
@@ -68,18 +66,18 @@ export default function CardsComparator(playerCards, computerPlayerCards){
 
 const cardsSort = (cards) => cards.sort((c1, c2)=> CARD_VALUE_MAP[c2.value]- CARD_VALUE_MAP[c1.value]);
 
-const isPair = (cards) => ((cards[0].value==cards[1].value) || (cards[1].value==cards[2].value) || (cards[0].value==cards[2].value))? true:false;
+const isPair = (cards) => ((cards[0].value===cards[1].value) || (cards[1].value===cards[2].value) || (cards[0].value===cards[2].value))? true:false;
 
-const isTrial = (cards)=>((cards[0].value==cards[1].value) && (cards[1].value==cards[2].value))?true:false;
+const isTrial = (cards)=>((cards[0].value===cards[1].value) && (cards[1].value===cards[2].value))?true:false;
 
-const isSameColor = (cards) => ((cards[0].suit==cards[1].suit) && (cards[1].suit ==cards[2].suit))?true:false;
+const isSameColor = (cards) => ((cards[0].suit===cards[1].suit) && (cards[1].suit ===cards[2].suit))?true:false;
 
 
 const isRun = (cards)=> {
-    if(cards[0].value=="A" && cards[1].value=="2" && cards[2].value[2]=="3"){
+    if(cards[0].value==="A" && cards[1].value==="2" && cards[2].value[2]==="3"){
         return true;
     }else 
-    return  (CARD_VALUE_MAP[cards[0].value] - CARD_VALUE_MAP[cards[1].value]==1 && CARD_VALUE_MAP[cards[1].value] - CARD_VALUE_MAP[cards[2].value]==1)?true:false;
+    return  (CARD_VALUE_MAP[cards[0].value] - CARD_VALUE_MAP[cards[1].value]===1 && CARD_VALUE_MAP[cards[1].value] - CARD_VALUE_MAP[cards[2].value]===1)?true:false;
 }
 
 
@@ -90,10 +88,10 @@ const isTop = (cards) => (isTrial(cards)|| isDoubleRun(cards) || isRun(cards) ||
 const innerCardsCompare= (playerCards, computerPlayerCards)=>{
     if(CARD_VALUE_MAP[playerCards[0].value]>CARD_VALUE_MAP[computerPlayerCards[0].value]){
         return playerCards;
-    }else if (CARD_VALUE_MAP[playerCards[0].value]==CARD_VALUE_MAP[computerPlayerCards[0].value]){
-        if(playerCards[0].suit=="SPADE"){
+    }else if (CARD_VALUE_MAP[playerCards[0].value]===CARD_VALUE_MAP[computerPlayerCards[0].value]){
+        if(playerCards[0].suit==="SPADE"){
             return playerCards;
-        } else if (computerPlayerCards[0].suit=="SPADE"){
+        } else if (computerPlayerCards[0].suit==="SPADE"){
             return computerPlayerCards;
         } else return 0;
     }
@@ -113,22 +111,22 @@ const innerCardsCompareForPairsAndTop= (playerCards, computerPlayerCards, isPair
     
     if(CARD_VALUE_MAP[playerCards[idx+1].value]>CARD_VALUE_MAP[computerPlayerCards[idx+1].value]){
         return playerCards;
-    }else if (CARD_VALUE_MAP[playerCards[idx+1].value]==CARD_VALUE_MAP[computerPlayerCards[idx+1].value])
+    }else if (CARD_VALUE_MAP[playerCards[idx+1].value]===CARD_VALUE_MAP[computerPlayerCards[idx+1].value])
     {
                 if(CARD_VALUE_MAP[playerCards[idx].value] > CARD_VALUE_MAP[computerPlayerCards[idx].value])
                 {
                         return playerCards;
-                }else if (CARD_VALUE_MAP[playerCards[idx].value] == CARD_VALUE_MAP[computerPlayerCards[idx].value])
+                }else if (CARD_VALUE_MAP[playerCards[idx].value] === CARD_VALUE_MAP[computerPlayerCards[idx].value])
                 {
                             if(CARD_VALUE_MAP[playerCards[idx+2].value]>CARD_VALUE_MAP[computerPlayerCards[idx+2].value])
                             {
                                 return playerCards;
-                            }else if (CARD_VALUE_MAP[playerCards[idx+2].value]==CARD_VALUE_MAP[computerPlayerCards[idx+2].value])
+                            }else if (CARD_VALUE_MAP[playerCards[idx+2].value]===CARD_VALUE_MAP[computerPlayerCards[idx+2].value])
                             {
-                                    if(playerCards[0].suit=="SPADE")
+                                    if(playerCards[0].suit==="SPADE")
                                     {
                                         return playerCards;
-                                    } else if (computerPlayerCards[0].suit=="SPADE"){
+                                    } else if (computerPlayerCards[0].suit==="SPADE"){
                                         return computerPlayerCards;
                                     } else return 0; 
                             }else return computerPlayerCards;
