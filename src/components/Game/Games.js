@@ -1,26 +1,27 @@
 import './Game.css'
 import FalashGame from "./FalashGame"
 import { useState } from 'react'
+import Form from './Form'
 
 function Games () {
 
-    const [game, setGame] = useState("GameScreen");
+    const [game, setGame] = useState(null);
+    const [playerName, setPlayerName] = useState(null)
 
+
+    
+    
      
     return (
     <div className="game-container">
-        <div className='left-sidebar'>
-        <button onClick= {()=>setGame("FalashGame")}> Falash Game </button>
-        <button onClick= {()=>setGame("")}> Black Jack Game </button>
-        </div>
-    
-    
-    <div className='game-view'>
-        {game==="FalashGame" && <FalashGame/>}
-    </div>
 
-    <div className='right-sidebar'>
+    <div className='game-view'>
+
+    {game===null&&playerName===null && <Form  setPlayerName={setPlayerName} setGame={setGame}/>}
         
+    {game==="FalashGame" && <FalashGame playerName={playerName}/>}
+    
+
     </div>
 
     </div>)
