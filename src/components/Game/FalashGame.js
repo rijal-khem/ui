@@ -56,17 +56,14 @@ const FalashGame = ({playerName}) => {
             computerPlayer.cards.push(initialCards.cards.pop());
             player.cards.push(initialCards.cards.pop());
         } 
-        console.log(player.cards)
-        console.log(computerPlayer.cards)
         setIsDealDisabled(true) 
     }
 
 
     const cleanPreviousCards=()=> {
        initialCards.cards = [...computerPlayer.cards, ...player.cards,...initialCards.cards];
-        computerPlayer.cards =[];
-        player.cards=[];
-       
+        player.cards = [];
+        computerPlayer.cards=[];
     }
 
     

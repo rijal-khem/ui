@@ -104,8 +104,6 @@ const innerCardsCompareForPairs= (playerCards, computerPlayerCards)=>{
     //send isPairComparision true for inner compare of pair cards.
     //for top starts for left which is idx = -1 i.e -1+1 = 0 index, can be refactired later.
     // send isPairComparision  false for comparing the top cards.
-   
-   var idx =0;
 
     if(CARD_VALUE_MAP[playerCards[1].value]>CARD_VALUE_MAP[computerPlayerCards[1].value]){
         return playerCards;
