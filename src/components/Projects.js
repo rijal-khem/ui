@@ -3,7 +3,7 @@
 function Projects(){
     return (<div>
         <h1>
-            This is Project done content.
+            This is Under Construction.
         </h1>
     </div>)
 }

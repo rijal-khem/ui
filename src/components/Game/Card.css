@@ -1,0 +1,53 @@
+
+.card {
+    position: relative;
+    height:100%;
+    width:100%;
+    border: 1px solid black;
+    background-color: rgb(241, 233, 233);
+    display: flex;
+    justify-content: center; 
+    border-radius: 10px;
+    box-shadow: 1px 1px;   
+    font-size: 1rem;
+    align-items: center;
+    user-select: none;
+    transform: translate(30px);
+
+
+}
+
+.card-back{
+    background-color:#ff0000;
+   
+}
+
+.card-front {
+    background-color: white;
+    font-size:5rem;
+}
+
+.card-red{
+    color: red;
+}
+.card-black{
+    color: rgb(2, 0, 0);
+}
+
+.card-data-element-top{
+    position: absolute;
+    font-size:15px;
+    top: 10px;
+    left:10px;
+
+}
+
+.card-data-element-bottom{
+    position: absolute;
+    font-size:15px;
+    bottom: 10px;
+    right:10px;
+    transform: rotate(180deg);
+}
+
+

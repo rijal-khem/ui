@@ -1,7 +1,29 @@
+import './Game.css'
+import FalashGame from "./FalashGame"
+import { useState } from 'react'
+import Form from './Form'
 
 function Games () {
-    return (<div>
-        <h1> This is Game content</h1>
+
+    const [game, setGame] = useState(null);
+    const [playerName, setPlayerName] = useState(null)
+
+
+    
+    
+     
+    return (
+    <div className="game-container">
+
+    <div className='game-view'>
+
+    {game===null&&playerName===null && <Form  setPlayerName={setPlayerName} setGame={setGame}/>}
+        
+    {game==="FalashGame" && <FalashGame playerName={playerName}/>}
+    
+
+    </div>
+
     </div>)
 }
 

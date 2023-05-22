@@ -1,0 +1,11 @@
+
+
+.game-container{
+  background-color:aliceblue;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+
