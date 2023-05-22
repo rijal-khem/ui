@@ -89,9 +89,9 @@ const innerCardsCompare= (playerCards, computerPlayerCards)=>{
     if(CARD_VALUE_MAP[playerCards[0].value]>CARD_VALUE_MAP[computerPlayerCards[0].value]){
         return playerCards;
     }else if (CARD_VALUE_MAP[playerCards[0].value]===CARD_VALUE_MAP[computerPlayerCards[0].value]){
-        if(playerCards[0].suit==="SPADE"){
+        if(playerCards[0].suit==="♠"){
             return playerCards;
-        } else if (computerPlayerCards[0].suit==="SPADE"){
+        } else if (computerPlayerCards[0].suit==="♠"){
             return computerPlayerCards;
         } else return 0;
     }
@@ -119,10 +119,10 @@ const innerCardsCompareForPairs= (playerCards, computerPlayerCards)=>{
                                 return playerCards;
                             }else if (CARD_VALUE_MAP[playerCards[2].value]===CARD_VALUE_MAP[computerPlayerCards[2].value])
                             {
-                                    if(playerCards[0].suit==="SPADE")
+                                    if(playerCards[0].suit==="♠")
                                     {
                                         return playerCards;
-                                    } else if (computerPlayerCards[0].suit==="SPADE"){
+                                    } else if (computerPlayerCards[0].suit==="♠"){
                                         return computerPlayerCards;
                                     } else return 0; 
                             }else return computerPlayerCards;
@@ -150,10 +150,10 @@ const innerCardsCompareForTop= (playerCards, computerPlayerCards, isPairComparis
                                 return playerCards;
                             }else if (CARD_VALUE_MAP[playerCards[2].value]===CARD_VALUE_MAP[computerPlayerCards[2].value])
                             {
-                                    if(playerCards[0].suit==="SPADE")
+                                    if(playerCards[0].suit==="♠")
                                     {
                                         return playerCards;
-                                    } else if (computerPlayerCards[0].suit==="SPADE"){
+                                    } else if (computerPlayerCards[0].suit==="♠"){
                                         return computerPlayerCards;
                                     } else return 0; 
                             }else return computerPlayerCards;

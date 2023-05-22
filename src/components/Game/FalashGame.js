@@ -37,13 +37,15 @@ const FalashGame = ({playerName}) => {
         cards:[]
     })
 
+    const players = [player,computerPlayer];
+    
+
 
 
     useEffect(()=>{
         setInitialCards(initialCards=> initialCards.shuffle())
         setIsShuffle(false)
-    
-    }, [isShuffle])
+    }, [isShuffle,isShow])
 
 
 
@@ -52,9 +54,7 @@ const FalashGame = ({playerName}) => {
             cleanPreviousCards();
             setWinner("")
         }
-        
-        setIsShow(false);
-        setIsSee(false);
+         
         for(let i=0; i<3;i++){
             computerPlayer.cards.push(initialCards.cards.pop());
             player.cards.push(initialCards.cards.pop());
@@ -67,6 +67,8 @@ const FalashGame = ({playerName}) => {
        initialCards.cards = [...computerPlayer.cards, ...player.cards,...initialCards.cards];
         player.cards = [];
         computerPlayer.cards=[];
+        setIsShow(false);
+        setIsSee(false);
     }
 
     
@@ -74,7 +76,7 @@ const FalashGame = ({playerName}) => {
 
     const handleShowClick =()=>{
        setIsShow(true);
-       setIsDealDisabled(false);
+       
        console.log(player.cards)
        console.log(computerPlayer.cards)
        const winningCards = CardsComparator(player.cards, computerPlayer.cards)
@@ -88,6 +90,10 @@ const FalashGame = ({playerName}) => {
         setWinner(computerPlayer.name);
       }
       else setWinner("Draw")
+
+      setIsDealDisabled(false);
+      setTimeout(cleanPreviousCards, 9000)
+   
 
     }
 
@@ -104,6 +110,7 @@ const FalashGame = ({playerName}) => {
      
 
     return (
+
         <div className="falash-game-container">
 
         <div className="game-area">
@@ -115,13 +122,13 @@ const FalashGame = ({playerName}) => {
                                                         if(isShow){
                                                         return  (
                                                             <div className= "falash-card">
-                                                                <Card value={card.value} suit={card.suit} />
+                                                                <Card classNames="card-front" value={card.value} suit={card.suit} />
                                                             </div>)
                                                         }
                                                         else {
                                                         return (
                                                             <div className= "falash-card">
-                                                                <Card value="facedown" suit="deck"/>
+                                                                <Card classNames="card-back"/>
                                                             </div>)
                                                         }
                                                         
@@ -144,13 +151,13 @@ const FalashGame = ({playerName}) => {
                                             if(isSee || isShow){
                                             return (
                                                 <div className= "falash-card">
-                                                    <Card value={card.value} suit={card.suit} />
+                                                    <Card classNames="card-front" value={card.value} suit={card.suit} />
                                                 </div>
                                             )
                                             } else {
                                                 return  (
                                                     <div className= "falash-card">
-                                                        <Card value="facedown" suit="deck"/>
+                                                        <Card classNames="card-back"/>
                                                     </div>
                                                 )
                                             }
@@ -162,7 +169,7 @@ const FalashGame = ({playerName}) => {
             </div>
             <div className="game-center">
                 <div className="deck-area">
-                        <Card value="facedown" suit="deck"/>
+                        <Card classNames="card-back"/>
                 </div>
 
                 <div className="player-console">
@@ -214,7 +221,6 @@ const FalashGame = ({playerName}) => {
 
 
     </div>)
-
 
 
 }
