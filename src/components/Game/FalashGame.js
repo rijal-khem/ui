@@ -7,7 +7,10 @@ import CardsComparator from './CardsComparator';
 
 
 
-const FalashGame = ({playerName}) => {   
+const FalashGame = ({playerName}) => {  
+    
+    
+    
 
 
     const deck = new Deck();
@@ -101,71 +104,68 @@ const FalashGame = ({playerName}) => {
      
 
     return (
-        <div className ="falash-game-container">
-             
-                    <div className="game-view" >
+        <div className="falash-game-container">
 
-                                    <div className="player-area">
-                                            <div className="player-details">
-                                                <h3>{computerPlayer.name}</h3> 
-                                                <h4> Score : {computerPlayer.score}</h4>
-                                            </div>
-                                            <div className ="cards-container">
-                                            
+        <div className="game-area">
+            <div className="players-area">
+                    <div className="player-area">
+                                <div className="falash-cards-container">
                                                 {
                                                     computerPlayer.cards.map((card)=>{
                                                         if(isShow){
-                                                        return   <Card value={card.value} suit={card.suit} />
+                                                        return  (
+                                                            <div className= "falash-card">
+                                                                <Card value={card.value} suit={card.suit} />
+                                                            </div>)
                                                         }
-                                                        else{
-                                                        return  <Card value="facedown" suit="deck"/>
+                                                        else {
+                                                        return (
+                                                            <div className= "falash-card">
+                                                                <Card value="facedown" suit="deck"/>
+                                                            </div>)
                                                         }
                                                         
                                                     }
                                                         )
                                                 }
-                                            </div>
-                                                
-                                    </div>
-                    
-                                    <div className="player-area">
-                                            <div className ="player-details">
-                                                <h3>{player.name}</h3> 
-                                                <h4> Score : {player.score}</h4>
 
-                                            </div>
-                                                    
-                                            <div className ="cards-container">
-                                                    {
-                                                        player.cards.map((card)=> {
-
-                                                            if(isSee || isShow){
-                                                            return  <Card value={card.value} suit={card.suit} />
-                                                            } else {
-                                                                return  <Card value="facedown" suit="deck"/>
-                                                            }
-                                                        }
-                                                            )
-                                                    }
-                                            </div>      
-                                    </div>
+                                            
+                                           
+                                </div>  
                     </div>
-                
+                    
 
+                    <div className="player-area" >
+                                <div className="falash-cards-container">
 
-          
-                    <div className='right-sidebar'>
-                            <div className="deck">
-                                <Card value="facedown" suit="deck"/>
-                            </div>
+                                    {
+                                        player.cards.map((card)=> {
 
-                            <div>
-                                <lable> Winner </lable><br></br>
-                                <h1>{winner}</h1>
-                            </div>
+                                            if(isSee || isShow){
+                                            return (
+                                                <div className= "falash-card">
+                                                    <Card value={card.value} suit={card.suit} />
+                                                </div>
+                                            )
+                                            } else {
+                                                return  (
+                                                    <div className= "falash-card">
+                                                        <Card value="facedown" suit="deck"/>
+                                                    </div>
+                                                )
+                                            }
+                                        }
+                                            )
+                                    }
+                                </div>  
+                    </div>
+            </div>
+            <div className="game-center">
+                <div className="deck-area">
+                        <Card value="facedown" suit="deck"/>
+                </div>
 
-
-                            <div className="console">
+                <div className="player-console">
                                     <div>
                                         <button className ="button" onClick ={()=>setIsShuffle(true)}> Shuffle </button>
                                     </div> 
@@ -185,12 +185,35 @@ const FalashGame = ({playerName}) => {
                                     <div>
                                             <button className ="button" onClick={handleRaiseClick}>Raise </button>
                                     </div>
-                            </div>
-                        
+                </div>
+            </div>
+
+            
+            
+            <div className="score-board">
+                    <div>
+                        <lable> Winner </lable><br></br>
+                            <h1>{winner}</h1>
                     </div>
+                    
+                    <div className="player-details">
+                        <h3>{computerPlayer.name}</h3> 
+                        <h4> Score : {computerPlayer.score}</h4>
+                    </div>
+
+                    <div>
+                        <h3>{player.name}</h3> 
+                        <h4> Score : {player.score}</h4>
+                    </div>
+             </div>       
             
         </div>
-    )
+        
+       
+       
+
+
+    </div>)
 
 
 

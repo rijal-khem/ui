@@ -1,8 +1,6 @@
+import './PlayingCard.css'
 
-import React from "react";
-import "./Card.css"
-
-function Card(props){
+export default function  PlayingCard (props) {
 
     const cardName = () => {
         let basepath = "/imgs/cardsImgs/";
@@ -19,5 +17,5 @@ function Card(props){
         </div>
     );
 
+
 }
-export default Card;
