@@ -2,21 +2,36 @@
 import React from "react";
 import "./Card.css"
 
+const SUITS = ["♠", "♥" ,"♦", "♣"];
+
 function Card(props){
 
-    const cardName = () => {
-        let basepath = "/imgs/cardsImgs/";
-        
-        let imageName = props.value + "_of_" + props.suit.toLowerCase() + ".png";
-        
-       return  basepath + imageName; 
-    } 
+    const className = "card" +" "+ props.classNames;
 
+    const cardColor=()=> (props.suit==="♠" || props.suit==="♣") ? "card-red" : "card-black";
 
+    
     return (
-        <div className="card-front-view">
-         <img src={cardName()} alt="card"></img>
+        <div className={className}>
+            <div className={cardColor()}>
+
+                    <div className="card-data-element-top">
+                                {props.value} {props.suit}
+                    </div>
+
+                    <div>
+                        {props.suit}
+                    </div>
+
+                    <div className="card-data-element-bottom">
+                                {props.value} {props.suit}
+                    </div>     
+
+            </div>
+            
+            
         </div>
+        
     );
 
 }

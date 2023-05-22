@@ -1,11 +1,12 @@
 
 import './Visualization.css'
+import Card from '../Game/Card';
 
 function Visualization(){
     return (
     <div className="visualization-container">
 
-        <h1> Under Construction </h1>
+        <Card classNames="card-back"></Card>
 
 
     </div>)
