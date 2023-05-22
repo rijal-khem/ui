@@ -2,7 +2,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 
-import Visualization from './components/Visualization';
+import Visualization from './components/Visualizations/Visualization';
 import Games from './components/Game/Games';
 import Projects from './components/Projects';
 import Contact from './components/Contact'

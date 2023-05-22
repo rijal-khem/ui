@@ -3,7 +3,7 @@
 function Contact(){
     return(<div>
         <h1>
-            This is contact items.
+            Under Constructions.
         </h1>
     </div>)
 }
