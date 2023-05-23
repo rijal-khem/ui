@@ -3,6 +3,8 @@ import Deck from './Deck';
 import React, { useEffect, useState } from 'react';
 import Card from './Card'
 import CardsComparator from './CardsComparator';
+import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
+
 
 
 
@@ -21,8 +23,13 @@ const FalashGame = ({playerName}) => {
     const [isShow, setIsShow] = useState(false);
 
     const [isDealDisabled, setIsDealDisabled] = useState(false)
+
+    const [isShowDisabled, setIsShowDisabled] = useState(true);
+    const [isSeeDisabled, setIsSeeDisabled] = useState(true);
+
     const [isSee, setIsSee] = useState(false)
     const [winner, setWinner] = useState("");
+    const [roundCount, setRoundCount] =useState(0);
 
     const [player, setPlayer] = useState({
         name:playerName,
@@ -37,7 +44,7 @@ const FalashGame = ({playerName}) => {
         cards:[]
     })
 
-    const players = [player,computerPlayer];
+    const players = [computerPlayer,player];
     
 
 
@@ -50,16 +57,25 @@ const FalashGame = ({playerName}) => {
 
 
     const dealCards =()=>{
+        setIsDealDisabled(true) 
+        setWinner("")
         if(computerPlayer.cards.length!==0 || player.cards.length!==0){
             cleanPreviousCards();
-            setWinner("")
         }
-         
+        
+        setRoundCount((roundCount)=>roundCount+1)
+       
         for(let i=0; i<3;i++){
             computerPlayer.cards.push(initialCards.cards.pop());
             player.cards.push(initialCards.cards.pop());
         } 
-        setIsDealDisabled(true) 
+
+        setIsShowDisabled(false);
+        setIsSeeDisabled(false);
+     
+
+        
+       
     }
 
 
@@ -67,6 +83,7 @@ const FalashGame = ({playerName}) => {
        initialCards.cards = [...computerPlayer.cards, ...player.cards,...initialCards.cards];
         player.cards = [];
         computerPlayer.cards=[];
+        setIsDealDisabled(false);
         setIsShow(false);
         setIsSee(false);
     }
@@ -75,7 +92,12 @@ const FalashGame = ({playerName}) => {
 
 
     const handleShowClick =()=>{
-       setIsShow(true);
+        setIsShow(true);
+        setIsSee(true)
+        setIsShowDisabled(true)
+        setIsDealDisabled(true)
+        setIsSeeDisabled(true);
+       
        
        console.log(player.cards)
        console.log(computerPlayer.cards)
@@ -91,8 +113,13 @@ const FalashGame = ({playerName}) => {
       }
       else setWinner("Draw")
 
-      setIsDealDisabled(false);
-      setTimeout(cleanPreviousCards, 9000)
+
+    
+      setTimeout(cleanPreviousCards,4000)
+      setIsSeeDisabled(true);
+      setIsShowDisabled(true)
+     
+      
    
 
     }
@@ -182,36 +209,41 @@ const FalashGame = ({playerName}) => {
                                     </div>
 
                                     <div>
-                                            <button className ="button" onClick={handleShowClick}> Show </button>
+                                            <button className ="button"  disabled ={isShowDisabled} onClick={handleShowClick}> Show </button>
                                     </div>
 
                                     <div>
-                                            <button className ="button" onClick={handleSeeClick}> See </button>
+                                            <button className ="button" disabled={isSeeDisabled} onClick={handleSeeClick}> See </button>
                                     </div>
 
-                                    <div>
-                                            <button className ="button" onClick={handleRaiseClick}>Raise </button>
-                                    </div>
                 </div>
             </div>
 
             
             
-            <div className="score-board">
-                    <div>
-                        <lable> Winner </lable><br></br>
+            <div className="game-stats">
+                    <div className="winner-banner">
+                            <h3>Round {roundCount} Winner </h3>
                             <h1>{winner}</h1>
                     </div>
-                    
-                    <div className="player-details">
-                        <h3>{computerPlayer.name}</h3> 
-                        <h4> Score : {computerPlayer.score}</h4>
-                    </div>
 
-                    <div>
-                        <h3>{player.name}</h3> 
-                        <h4> Score : {player.score}</h4>
-                    </div>
+
+                    <div className="score-board">
+
+                            {
+                                players.map((player)=>{
+                                        return (
+
+                                            <div className="player-state">
+                                                <h3>{player.name}</h3>
+                                                <br/>
+                                                <h4>Score : {player.score}</h4>
+                                            </div>
+                                        )
+                                })
+
+                            }
+                    </div>     
              </div>       
             
         </div>

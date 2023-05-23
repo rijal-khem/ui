@@ -29,11 +29,13 @@ export default function Form({setPlayerName, setGame}) {
 
 
     return (
-            <form onSubmit={handleSubmit}>
+    
+        
+        <form onSubmit={handleSubmit}>
 
                 {
                     localStorage.getItem('playerName')===null && 
-                    <div>
+                    <div className ="greeting">
                         <h3> Welcome to Fun </h3>
                     <label> Name </label>
                     <br/>
@@ -42,7 +44,7 @@ export default function Form({setPlayerName, setGame}) {
                 }
                 {
                     localStorage.getItem('playerName')!==null && 
-                    <div>
+                    <div className ="greeting">
                         <h3> Welcome back ! <br/> {localStorage.getItem('playerName')}</h3>
                     </div>
 
