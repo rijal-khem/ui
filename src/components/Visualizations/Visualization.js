@@ -6,7 +6,7 @@ function Visualization(){
     return (
     <div className="visualization-container">
 
-        <Card classNames="card-back"></Card>
+       
 
 
     </div>)

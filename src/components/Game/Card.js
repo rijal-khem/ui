@@ -8,7 +8,7 @@ function Card(props){
 
     const className = "card" +" "+ props.classNames;
 
-    const cardColor=()=> (props.suit==="♠" || props.suit==="♣") ? "card-red" : "card-black";
+    const cardColor=()=> (props.suit==="♥" || props.suit==="♦") ? "card-red" : "card-black";
 
     
     return (
