@@ -1,10 +1,176 @@
 
 import './Visualization.css'
-import Card from '../Game/Card';
+import { useEffect, useState } from 'react';
+import React  from 'react'
+import ArrayBar from "./ArrayBar"
+
+
 
 function Visualization(){
+
+
+
+
+    const [array, setArray] = useState([])
+    const [isGenerateDisabled, setIsGenerateDisabled] = useState(false);
+    const [isInsertionSortDisabled, setIsInsertionSortDisabled] = useState(false);
+    const [isResetDisabled, setIsResetDisabled] = useState(false)
+
+    const [iterationCount, setIterationCount]  = useState(0);
+    const [animationRunning, setAnimationRuning] = useState(false)
+
+
+    function animate(elementsArr){
+        
+        if(elementsArr.length===0){
+            return;
+        }
+        const [k,j] = elementsArr.shift();
+
+        [array[k], array[j]] = [array[j], array[k]]
+        setIterationCount((iterationCount)=> iterationCount +1)
+        
+
+        setTimeout(()=>{
+            animate(elementsArr)
+        }, .0001)
+            
+    }
+
+    
+
+    const handleResetclick=()=>{
+        setArray([]);
+        setIsGenerateDisabled(false);
+    }
+
+
+
+
+    
+
+  
+    function insertionSortingAlgo(arrayCopy){
+
+        const elementsForAnimation =[];
+
+        for(let i=1; i<arrayCopy.length;i++){
+            //supposing the first element i.e at idx=0 is already sorted on we start sorting from next position 
+            //as similary as we sort playing cards by placing the new card in left or right position of previous card
+                //[86, 45,63,25]
+                //say i=3 then value is 8, this 8 has to compared backward
+                //16
+                for(let k=i-1;k>=0;k--){           //k=2
+                    
+                    if(arrayCopy[k]>arrayCopy[k+1]){     //expression 86>16 true
+                        //swap the position 
+                        [arrayCopy[k+1], arrayCopy[k]] =[arrayCopy[k], arrayCopy[k+1]]
+                        elementsForAnimation.push([k+1, k])
+                       
+                    }
+                }            
+                 
+        }
+
+     return elementsForAnimation;
+
+
+    }
+    
+    
+
+    
+    function generateRandomNumbersBetween(min, max){
+      return Math.ceil(Math.random() *(max-min)+ min);
+    }
+
+
+    function mapNumbersToPercent(number){
+        return Math.floor(number*(100/(max-min)))
+    }
+
+    function fillArrayWithRandomNumbers(min, max){
+        for(let i=0;i<150;i++){
+            var randomNumber = generateRandomNumbersBetween(min,max);
+           const randomNumberPercent =  Math.floor(100*generateRandomNumbersBetween(min,max)/(max-min))
+           array.push(randomNumberPercent)
+        }
+       
+        
+    
+    }
+
+
+
+        const handleInsertionAlgoClick = ()=>{
+            
+        setIsInsertionSortDisabled(true);
+        const copyArr = array.slice();
+        const animationIdxsArr = insertionSortingAlgo(copyArr);
+        console.log(animationIdxsArr)
+
+        setAnimationRuning(true);
+        animate(animationIdxsArr)
+    
+
+
+      }
+
+      
+
+
+
+    const handleGenerateArray = (e)=> {
+        fillArrayWithRandomNumbers(1, 500)
+        setIsInsertionSortDisabled(false);
+        setIsGenerateDisabled(true);
+        setIterationCount(0)
+    
+        
+    }
+
+
     return (
     <div className="visualization-container">
+      
+        <div className="array-box">
+
+           {
+            array.map((value,idx)=> {
+                return (
+                    <ArrayBar value={value} key={idx}/>
+                )
+            })
+           }
+        </div>
+
+
+        <div className="left-container">  
+
+            <div className="sort-algo-details">
+                <h3>Insertion Sorting Algorithm</h3>
+            </div>
+            <div className="stats">
+                <h3>Data Size : {array.length}</h3>
+                <h3>Number of Iterations : {iterationCount}</h3> 
+            </div>
+
+            <div className="console">
+
+                <button disabled = {isGenerateDisabled} onClick={handleGenerateArray}>Generate New Array</button>
+                <button disabled={isInsertionSortDisabled} onClick={handleInsertionAlgoClick}>Insertion Sort</button>
+                <button disabled={isResetDisabled} onClick={handleResetclick}>Reset Array</button>
+
+            </div>
+
+            
+            
+
+            
+        </div>
+        
+
+       
 
        
 

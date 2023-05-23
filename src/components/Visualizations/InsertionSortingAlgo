@@ -1,0 +1,28 @@
+
+
+
+
+
+function insertionSortingAlgo(array){
+
+    console.log("Array beofre sorting")
+    console.log(array)
+
+
+    for(let i=0; i<array.length;i++){
+        if(array[i]>array[i+1]){
+            //swapping it 
+            var oldValue = array[i];
+            array[i] = array[i+1];
+            array[i+1] = oldValue;
+        }
+        
+    }
+
+    console.log("Array after sorting")
+    console.log(array)
+
+
+}
+
+export default insertionSortingAlgo;
