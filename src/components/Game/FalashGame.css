@@ -87,8 +87,10 @@
     order:1;
     height: 38%;
     width:50%;
-    margin-left:20%;
-    margin-top: 7%;  
+    margin-left:10%;
+    margin-top: 7%; 
+  
+    
 }
 
 .player-console{
@@ -105,9 +107,47 @@
    
 }
 
-.score-board {
+.game-stats {
     order:3;
     width:21%;
+    display: flex;
+    flex-direction: column;
+}
+
+.winner-banner{
+    order:1;
+    height:25%;
+    margin-top: 20px;
+    border: 5px solid rgb(248, 2, 2);
+    box-shadow: 2px 2px;   
+    margin-right:20px;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+.winner-banner h1 {
+    color: rgb(11, 1, 98);
+}
+
+.score-board {
+    order:2;
+    margin-top:20px;
+    
+}
+
+.player-state {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: aliceblue;
+    box-shadow: 2px 2px;   
+    
+    margin: 40px;
+    height:40%;
+   
+
+}
+
+h3{
+    margin-top:5px;
 }
 
 
