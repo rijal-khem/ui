@@ -2,7 +2,8 @@
 import './Visualization.css'
 import { useEffect, useState } from 'react';
 import React  from 'react'
-import ArrayBar from "./ArrayBar"
+import ArrayBar from "./ArrayBar";
+
 
 
 
@@ -14,6 +15,8 @@ function Visualization(){
     const [array, setArray] = useState([])
     const [isGenerateDisabled, setIsGenerateDisabled] = useState(false);
     const [isInsertionSortDisabled, setIsInsertionSortDisabled] = useState(false);
+
+    const [isMergeSortDisabled, setMergeSortDisabled] = useState(false)
     const [isResetDisabled, setIsResetDisabled] = useState(false)
 
     const [iterationCount, setIterationCount]  = useState(0);
@@ -42,18 +45,15 @@ function Visualization(){
     const handleResetclick=()=>{
         setArray([]);
         setIsGenerateDisabled(false);
+        
     }
+     
 
 
-
-
-    
-
-  
     function insertionSortingAlgo(arrayCopy){
 
         const elementsForAnimation =[];
-
+    
         for(let i=1; i<arrayCopy.length;i++){
             //supposing the first element i.e at idx=0 is already sorted on we start sorting from next position 
             //as similary as we sort playing cards by placing the new card in left or right position of previous card
@@ -71,13 +71,100 @@ function Visualization(){
                 }            
                  
         }
-
+    
      return elementsForAnimation;
+    
+    
+    }
 
+
+
+        function mergeSortAlgo(arrayCopy){
+
+            setIterationCount(iterationCount=>iterationCount+1);
+ 
+
+
+            if(arrayCopy.length<=1){
+                return arrayCopy;
+            } 
+        
+
+            let midpoint = Math.floor(arrayCopy.length/2)
+           
+            let leftArray = arrayCopy.slice(0,midpoint)
+            let rightArray = arrayCopy.slice(midpoint);
+
+            leftArray  = mergeSortAlgo(leftArray)
+            rightArray = mergeSortAlgo(rightArray)
+
+            
+           
+            return doMerge(leftArray,rightArray);
+        }
+
+
+        function doMerge(leftArray, rightArray){
+
+           const sortedArray =[];
+            let leftIdx = 0;
+            let rightIdx =0;
+            let mainIdx =0;
+
+            //Compare smallest elements 
+             
+            while(leftIdx<leftArray.length && rightIdx<rightArray.length){
+               debugger
+                if(leftArray[leftIdx] <= rightArray[rightIdx]){
+                   sortedArray[mainIdx] = leftArray[leftIdx];
+                    leftIdx++;
+                } else{
+                    sortedArray[mainIdx] = rightArray[rightIdx]
+                    rightIdx++;
+                }
+               mainIdx++;
+               
+            }
+
+
+            //if arrays are unequal length , insert remaining array to input array.       
+          
+            if(leftIdx<leftArray.length){
+                sortedArray.push(...leftArray.slice(leftIdx))  
+            }
+
+            if(rightIdx<rightArray.length){
+                sortedArray.push(...rightArray.slice(rightIdx))
+            }
+       
+         
+            return sortedArray;
+           
+        }
+
+    
+    const handleMergeSortAlgoClick =()=>{
+
+        setMergeSortDisabled(true);
+        setIsInsertionSortDisabled(true);
+        setIsGenerateDisabled(true);
+
+        const copyArray = array.slice();
+
+       const sortedArray =  mergeSortAlgo(copyArray);
+       
+       console.log(sortedArray);
+
+       setArray(sortedArray);
+
+        
+
+       
+
+      
 
     }
-    
-    
+  
 
     
     function generateRandomNumbersBetween(min, max){
@@ -125,6 +212,7 @@ function Visualization(){
         setIsInsertionSortDisabled(false);
         setIsGenerateDisabled(true);
         setIterationCount(0)
+        setMergeSortDisabled(false)
     
         
     }
@@ -160,6 +248,7 @@ function Visualization(){
                 <button disabled = {isGenerateDisabled} onClick={handleGenerateArray}>Generate New Array</button>
                 <button disabled={isInsertionSortDisabled} onClick={handleInsertionAlgoClick}>Insertion Sort</button>
                 <button disabled={isResetDisabled} onClick={handleResetclick}>Reset Array</button>
+                <button disabled={isMergeSortDisabled} onClick={handleMergeSortAlgoClick}>Merge Sort</button>
 
             </div>
 
